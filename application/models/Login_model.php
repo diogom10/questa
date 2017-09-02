@@ -31,9 +31,8 @@ Class Login_model extends CI_Model {
         } else {
             $retorno['cpf'] = 0;
         }
-        
+
         return $retorno['cpf'];
-    
     }
 
     public function inserir($dados) {
@@ -47,26 +46,31 @@ Class Login_model extends CI_Model {
             "nome_login" => '',
             'id_usuario' => ''
         );
-        $this->db->select('id,email,senha,nome');
+     
         $this->db->where('email', $dados['email']);
         $query = $this->db->get('usuario')->result();
-
+    
         foreach ($query as $login) {
 
             if ($login->email == $dados['email']) {
-
                 if ($login->senha == $dados['senha']) {
+                    if ($login->permicao == 1) {
 
-                    $resposta["json"] = 2;
-                    $resposta["nome_login"] = $login->nome;
-                    $resposta["id_usuario"] = $login->id;
+                        $resposta["json"] = 3;
+                        $resposta["nome_login"] = $login->nome;
+                        $resposta["id_usuario"] = $login->id;
+                    } else {
+                        $resposta["json"] = 2; //usuario não possui permissão
+                    }
                 } else {
                     $resposta["json"] = 1; //senha incorreta
                 }
             } else {
-                $resposta["json"] = 0; //email incorreto    
+                $resposta["json"] = 0; //email incorreto  
             }
         }
+
+
         return $resposta;
     }
 

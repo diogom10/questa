@@ -15,8 +15,8 @@ Class Home_model extends CI_Model {
 
         foreach ($query as $result) {
             $retorno['nome'] = $result->nome;
-            $retorno['email'] = $result->foto;
-            $retorno['foto'] = $result->foto;
+            $retorno['email'] = $result->email;
+            $retorno['data_nascimento'] = $result->data_nascimento;
         }
 
         return $retorno;

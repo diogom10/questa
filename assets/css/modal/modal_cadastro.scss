@@ -14,24 +14,12 @@ $tamanho_inputs:34px;
 
 
 
-.geral_modal
+.geral_cadastro
 {
-
     z-index: 9999;
     border: solid 1px #d0cbcb;
-    width: 500px;
-    height: 301px;
-    left: 33%;
-    top: 30%;
-    position: sticky;
-  
-    .visual_modal{
-        background-color: #ffffff;
-        width: 100%;
-        height: 100%;
-        border: solid 1px $borda-modal;
-        border-radius:9px;
-    }
+    background-color: white;
+    border-radius:10px;
 
 }
 

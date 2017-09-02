@@ -1,4 +1,4 @@
-<div class="geral_modal" ng-show="modalCadastro">
+<div class="geral_cadastro" ng-show="modalCadastro">
     <div class="visual_modal">
 
         <span class="txt-title">Cadastre o Usuario</span>

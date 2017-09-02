@@ -22,14 +22,15 @@ class Login extends CI_Controller {
     public function validador_cadastro() {
 
         $params = $this->input->post();
-      
+
         $dados_cadastro = array(
             "nome" => $params["nome"],
             "email" => $params["email"],
             "senha" => md5($params["senha"] . HASH),
             "cpf" => $params["cpf"],
             "data_nascimento" => $params["data"],
-            "foto" => "assets/images/user/default.jpg"
+            "permicao" => 1,
+            "tipo" => 1
         );
 
         $retorno_cadastro = [];
@@ -60,45 +61,65 @@ class Login extends CI_Controller {
 
     public function validador_login() {
 
+        $params = $this->input->post();
+
         $dados_login = array(
-            "email" => $this->input->Post("email_login"),
-            "senha" => md5($this->input->Post("pwd_login") . HASH),
+            "email" => $params["email"],
+            "senha" => md5($params["senha"] . HASH),
         );
 
-
         $retorno_login = [];
-
         $valida = $this->model->valida_login($dados_login);
 
-        if ($valida['json'] == 0) {
-            $retorno_login['existe_erro'] = "email";
-            $retorno_login['mensagem'] = "*Email Não Encontrado";
-        } else if ($valida['json'] == 1) {
-            $retorno_login['existe_erro'] = "senha";
-            $retorno_login['mensagem'] = "*Senha Incorreta";
-        } else if ($valida['json'] == 2) {
+        // var_dump($valida).die();
 
-            $retorno_login['existe_erro'] = "valido";
-            $retorno_login['mensagem'] = $valida["nome_login"];
+        switch ($valida['json']) {
+            case 0:
+                $retorno_login['existe_erro'] = "email";
+                $retorno_login['mensagem'] = "*Email Não Encontrado";
+                $dados_sessao = array(
+                    'nome_de_usuario' => null,
+                    'email' => null,
+                    'logged_in' => false
+                );
 
-            $usuario = explode(' ', $valida["nome_login"]);
+                $this->session->set_userdata($dados_sessao);
+                break;
+            case 1:
+                $retorno_login['existe_erro'] = "senha";
+                $retorno_login['mensagem'] = "*Senha Incorreta";
+                $dados_sessao = array(
+                    'nome_de_usuario' => null,
+                    'email' => null,
+                    'logged_in' => false
+                );
 
-            $dados_sessao = array(
-                'nome_de_usuario' => $usuario[0] . " " . $usuario[1],
-                'email' => $dados_login['email'],
-                'logged_in' => true,
-                'id_user' => $valida['id_usuario']
-            );
-            $this->session->set_userdata($dados_sessao);
-        } else {
-            $dados_sessao = array(
-                'nome_de_usuario' => null,
-                'email' => null,
-                'logged_in' => false
-            );
+                $this->session->set_userdata($dados_sessao);
+                break;
+            case 2:
+                $retorno_login['existe_erro'] = "permicao";
+                $retorno_login['mensagem'] = "Usuario Não Possui Permissão ";
+                $dados_sessao = array(
+                    'nome_de_usuario' => null,
+                    'email' => null,
+                    'logged_in' => false
+                );
 
-            $this->session->set_userdata($dados_sessao);
+                $this->session->set_userdata($dados_sessao);
+                break;
+            case 3:
+                $retorno_login['existe_erro'] = "valido";
+                $retorno_login['mensagem'] = $valida["nome_login"];
+                $dados_sessao = array(
+                    'nome_de_usuario' => $valida["nome_login"],
+                    'email' => $dados_login['email'],
+                    'logged_in' => true,
+                    'id_user' => $valida['id_usuario']
+                );
+                $this->session->set_userdata($dados_sessao);
+                break;
         }
+
         echo json_encode($retorno_login);
     }
 

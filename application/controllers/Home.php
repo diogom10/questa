@@ -14,9 +14,9 @@ class Home extends CI_Controller {
         $user = $this->model->get_usuario($this->session->userdata('id_user'));
         $data['nome'] = $user['nome'];
         $data['email'] = $user['email'];
-        $data['foto'] = $user['foto'];
+        $data['data_nascimento'] = $user['data_nascimento'];
         $data['title'] = "Sigere";
-        $this->load->view('templates/energia_jquery/home_view.php', $data);
+        $this->load->view('templates/energia_angular/home_view.php', $data);
     }
 
     public function sair() {
