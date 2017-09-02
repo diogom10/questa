@@ -1,0 +1,29 @@
+body {
+  overflow-x: overlay;
+  overflow-y: hidden; }
+  body .entrada {
+    border: solid 1px #d0cbcb;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px; }
+  body span {
+    font-family: roboto; }
+  body .txt-cadastro {
+    cursor: pointer;
+    color: #0f7c88; }
+  body .txt-title {
+    font-size: 20px; }
+  body .txt-subtitle {
+    font-size: 12px; }
+
+.masc {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9000;
+  background-color: #000;
+  opacity: 0.4; }
+
+/*# sourceMappingURL=login.css.map */
