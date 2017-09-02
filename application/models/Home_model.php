@@ -22,10 +22,15 @@ Class Home_model extends CI_Model {
         return $retorno;
     }
 
-    public function upload_img($data) {
+    /*public function upload_img($data) {
         $this->db->set('foto', $data["foto"]);
         $this->db->where('id', $data["id"]);
         $this->db->update('usuario');
+    }*/
+     public function get_all_usuario() {
+        
+        $query = $this->db->get('usuario')->result();
+        return $query;
     }
 
 }

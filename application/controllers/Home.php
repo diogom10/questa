@@ -30,49 +30,18 @@ class Home extends CI_Controller {
         echo json_encode($Retorno_sair);
     }
 
-    public function upload() {
+    public function get_usuarios() {
 
-        $Retorno_upload = [];
-        $validacao = 0;
-        $extencao = ["jpg", "jpeg", "tiff", "png"];
-
-        if (!empty($_FILES['file'])) {
-
-            $foto_geral = explode(".", $_FILES['file']['name']);
-            $nome = $foto_geral[0];
-            $ext_arquivo = $foto_geral[1];
-
-            foreach ($extencao as $ext) {
-                if ($ext == $ext_arquivo) {
-                    $validacao++;
-                }
-
-            }
-            if ($validacao > 0) {
-                $endereco_final = 'assets/images/user/' . $nome . uniqid() . "." . $ext_arquivo;
-
-                move_uploaded_file($_FILES['file']['tmp_name'], './' . $endereco_final);
-
-                $data_model = array(
-                    'id' => $this->session->userdata('id_user'),
-                    'foto' => $endereco_final
-                );
-
-
-                $this->model->upload_img($data_model);
-
-                $Retorno_upload['valido'] = TRUE;
-                $Retorno_upload['imagem'] = $endereco_final;
-            } else {
-
-                $Retorno_upload['valido'] = FALSE;
-                $Retorno_upload['erro'] = "*Arquivo Invalido";
-            }
-
-            echo json_encode($Retorno_upload);
-            }
-     
+        $params = $this->input->post();
+        
+        if ($params['valido'] == 1) {
+            $retorno['sucess'] = true;
+            $retorno["usuarios"] = $this->model->get_all_usuario();
+        } else {
+            $retorno['sucess'] = false;
         }
+       
+        echo json_encode($retorno);
     }
 
-
+}
