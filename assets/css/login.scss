@@ -7,7 +7,7 @@ body{
     .entrada{
         border: solid 1px #d0cbcb;
         width: 100%;
-        height:200px;
+        height:215px;
         border-radius:10px;
     }
 
@@ -28,6 +28,12 @@ body{
 
     .txt-subtitle{
         font-size:12px;
+    }
+        .selecionado{
+        background-color: #d2d2ab;
+    }
+    .negrito{
+        font-weight:bold;
     }
 }
 .masc

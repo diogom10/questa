@@ -39,8 +39,10 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding-left:10%;padding-top:2%;">
                             <button class="col-md-11  col-lg-11 col-sm-12 col-xs-12 btn btn-primary" ng-disabled="loginForm.$invalid" ng-click="validaLogin()">Entrar</button>
                         </div>
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"style="padding-top:1%;"></div>
-                        <span class="col-md-12 txt-cadastro" ng-click="openModal();">Ainda não é cadastrado</span>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding-top:1%;"></div>
+                        <span class="col-md-5 txt-cadastro" style="padding-left:5%" ng-click="openModal();">Cadastro</span>
+                        <span class="col-md-5 txt-cadastro" ng-click="openTabela();">Tabela com Usuarios</span>
+
 
                         <div class="alert alert-danger centered" ng-show="loginForm.senha.$error.required && loginForm.senha.$dirty">
                             Campo Senha Vazio
@@ -124,10 +126,67 @@
                     </form>
                 </div>
             </div>
+            <div ng-show="mostraTabela">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <button class="btn btn-info" ng-click="closeTabela()">Voltar</button>
+                    <button class="btn btn-danger"  ng-show="massa" ng-click="excluirUsuario(null)">Excluir massa</button>
+                </div>
+                <table style="width:100%" class="table table-bordered" >
+                    <tr>
+                        <th><input type="checkbox" ng-model="seleciona" ng-click="armazenaTodosID(seleciona)"></th>
+                        <th>Nome</th>
+                        <th>Email</th> 
+                        <th>Data de Nascimento</th>
+                        <th>CPF</th>
+                        <th width="4%"></th>
+                    </tr>
+                    <tr ng-class="{'selecionado negrito': seleciona}" ng-repeat="u in usuarios">
+                        <td><input type="checkbox" ng-model="seleciona" ng-click="armazenaID(u.id, seleciona)" ng-checked="allchecked"></td>
+                        <td>
+                            <div ng-bind="u.nome"></div>
+                            <div  ng-show="id_click === u.id ? true : false">
+                                <input type="text" class="form-control"  ng-model="edit.nome" ng-keyup="editNome(edit.nome)">
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-bind="u.email"></div>
+                            <div  ng-show="id_click === u.id ? true : false">
+                                <input class="form-control"  type="text" ng-model="edit.email" ng-keyup="editEmail(edit.email)">
+                            </div>
+                        </td> 
+                        <td>
+                            <div ng-bind="u.data_nascimento"></div>
+                            <div  ng-show="id_click === u.id ? true : false">
+                                <input class="form-control" type="date" ng-model="edit.data_nascimento" ng-keyup="editData_nascimento(edit.data_nascimento)">
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-bind="u.cpf"></div>
+                            <div  ng-show="id_click === u.id ? true : false">
+                                <input class="form-control" type="text" ng-model="edit.cpf" ng-keyup="editcpf(edit.cpf)">
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-show="id_click === u.id ? true : false">
+                                <button class="btn btn-info col-md-12" ng-click="editarUsuario(u.id)">Salvar</button>
+                            </div>
+                            <div ng-show="id_click === u.id ? false : true">
+                                <button class="btn btn-info col-md-12" ng-click="editarClick(u.id)">Editar</button>
+                            </div>
+                            <div ng-show="id_click === u.id ? true : false">
+                                <button class="btn btn- col-md-12" ng-click="cancelaEdit()">Cancelar</button>
+                            </div>
+                            <div ng-show="id_click === u.id ? false : true">
+                                <button  class="btn btn-danger col-md-12" ng-click="excluirUsuario(u.id)">Excluir</button
+                            </div>
 
 
-        </div>
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"style="padding-bottom:20%"> </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"style="padding-bottom:20%"> </div>
 
 
 

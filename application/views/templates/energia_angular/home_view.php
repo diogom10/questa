@@ -15,12 +15,13 @@
 
         </head>
         <body ng-controller="homeCtrl">
-            <div> <?= $nome; ?></div>
+            <div>Bem Vindo <?= $nome; ?></div>
             <div> <?= $email; ?></di>
-            <div> <?= $data_nascimento ?></div>
+            <div> <?= $data_nascimento; ?></div>
 
-            <button ng-click="getUsuarios()">USUARIOS</button>
+         
 
+            <button>Desolgar</button>
             <?php
         } else {
             header("Location:http://localhost/questa//"); /* Redirect browser */

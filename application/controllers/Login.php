@@ -38,6 +38,7 @@ class Login extends CI_Controller {
 
         $valida_email = $this->model->valida_email($dados_cadastro["email"]);
         $valida_cpf = $this->model->valida_cpf($dados_cadastro["cpf"]);
+
         if ($valida_email == 0 && $valida_cpf == 0) {
             $this->cadastrar($dados_cadastro);
             $retorno_cadastro['existe_erro'] = false;
@@ -121,6 +122,30 @@ class Login extends CI_Controller {
         }
 
         echo json_encode($retorno_login);
+    }
+
+    public function delete() {
+        $params = $this->input->post();
+
+        $valida = $this->model->delete($params['id']);
+        if ($valida) {
+            $retorno['sucess'] = true;
+        } else {
+            $retorno['sucess'] = false;
+        }
+        echo json_encode($retorno);
+    }
+
+    public function edit() {
+        $params = $this->input->post();
+
+        $valida = $this->model->edit($params);
+        if ($valida) {
+            $retorno['sucess'] = true;
+        } else {
+            $retorno['sucess'] = false;
+        }
+        echo json_encode($retorno);
     }
 
 }
