@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                            <input class="form-control"  name="cpf" type="text" ng-model="cadastro.cpf" placeholder="CPF" ng-required="true" ng-pattern="/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/" autocomplete="off"/>
+                            <input class="form-control"  name="cpf" type="text" ng-model="cadastro.cpf" placeholder="CPF" ng-required="true" ng-pattern="/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/" maxlength="11" autocomplete="off"/>
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                             <input class="form-control"  name="senha" type="password" ng-model="cadastro.senha" placeholder="senha" ng-required="true" autocomplete="off" />
@@ -103,6 +103,10 @@
                             <div class="alert alert-danger centered"ng-show="cadastroForm.email.$error.pattern">
                                 Formato de email incorreto
                             </div>
+                            <div class="alert alert-danger centered" ng-show="cadastroForm.email.$error.maxlength">
+                                *CPF com maximo de numeros permitido invalido
+                            </div>
+
                             <div class="alert alert-danger centered" ng-show="cadastroForm.senha.$error.required && cadastroForm.senha.$dirty">
                                 Campo Senha Vazio
                             </div>
@@ -182,10 +186,10 @@
                         </td>
                         <td>
                             <div ng-show="id_click === u.id ? true : false">
-                                <button class="btn btn-success col-md-12" ng-click="editarUsuario(u.id)">Salvar</button>
+                                <button class="btn btn-success col-md-12" ng-click="editarUsuario()">Salvar</button>
                             </div>
                             <div ng-show="id_click === u.id ? false : true">
-                                <button class="btn btn-info col-md-12" ng-click="editarClick(u.id,u)">Editar</button>
+                                <button class="btn btn-info col-md-12" ng-click="editarClick(u)">Editar</button>
                             </div>
                             <div ng-show="id_click === u.id ? true : false">
                                 <button class="btn btn-warning col-md-12" ng-click="cancelaEdit()">Cancelar</button>

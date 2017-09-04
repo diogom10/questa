@@ -16,7 +16,7 @@ body {
   body .txt-subtitle {
     font-size: 12px; }
   body .selecionado {
-    background-color: #d2d2ab; }
+    background-color: #e4e4e4; }
   body .negrito {
     font-weight: bold; }
 
@@ -29,13 +29,5 @@ body {
   z-index: 9000;
   background-color: #000;
   opacity: 0.4; }
-
-.txt-pagination {
-  float: left;
-  padding-left: 2%;
-  cursor: pointer;
-  color: #0f7c88;
-  font-size: 15px;
-  font-style: underline; }
 
 /*# sourceMappingURL=login.css.map */

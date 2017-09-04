@@ -14,7 +14,7 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
     $scope.limite = 5;
     $scope.edit;
     $scope.paginas = [];
-    vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
+    $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
 
     $scope.validaLogin = function () {
         $http({
@@ -55,12 +55,12 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
         $scope.modalCadastro = true;
         $scope.mostraLogin = false;
         console.log($scope.modalCadastro);
-        $scope.cadastro = vazio;
+        $scope.cadastro = $scope.vazio;
     };
     $scope.closeModal = function () {
         $scope.modalCadastro = false;
         $scope.mostraLogin = true;
-        $scope.cadastro = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
+        $scope.cadastro = $scope.vazio;
     };
     $scope.cadastroUsuario = function () {
 
@@ -209,10 +209,11 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
         }
     };
 
-    $scope.editarClick = function (id, dados) {
-        $scope.id_click = id;
-        $scope.edit = vazio;
-        $scope.edit = {nome: dados.nome, email: dados.email, data_nascimento: dados.data_nascimento, cpf: dados.cpf, permicao: 1};
+    $scope.editarClick = function (dados) {
+        $scope.id_click = dados.id;
+        $scope.edit = $scope.vazio;
+        $scope.edit = {nome: dados.nome, email: dados.email, data_nascimento: dados.data_nascimento, cpf: dados.cpf, permicao: 1, id:dados.id};
+        console.log($scope.edit);
     };
 
     $scope.cancelaEdit = function () {
@@ -242,8 +243,8 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
 
     };
     ////
-    $scope.editarUsuario = function (id) {
-        $scope.edit.id = id;
+    $scope.editarUsuario = function () {
+       
         console.log($scope.edit);
         $scope.id_click = "";
         $http({
