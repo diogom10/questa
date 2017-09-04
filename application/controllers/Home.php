@@ -14,7 +14,7 @@ class Home extends CI_Controller {
         $user = $this->model->get_usuario($this->session->userdata('id_user'));
         $data['nome'] = $user['nome'];
         $data['email'] = $user['email'];
-        $data['data_nascimento'] = $user['data_nascimento'];
+        $data['data_nascimento'] = $this->dataLogin($user['data_nascimento']);
         $data['title'] = "Sigere";
         $this->load->view('templates/energia_angular/home_view.php', $data);
     }
@@ -24,24 +24,32 @@ class Home extends CI_Controller {
         if ($this->input->POST('login')) {
             $data = array("nome_de_usuario", "email", "logged_in");
             $this->session->unset_userdata($data);
-            $Retorno_sair = 1;
+            $retorno['sucess'] = true;
         }
-
-        echo json_encode($Retorno_sair);
+        echo json_encode($retorno);
     }
 
     public function get_usuarios() {
 
         $params = $this->input->post();
-        
+
         if ($params['valido'] == 1) {
             $retorno['sucess'] = true;
             $retorno["usuarios"] = $this->model->get_all_usuario();
         } else {
             $retorno['sucess'] = false;
         }
-       
+
         echo json_encode($retorno);
+    }
+
+    public function dataLogin($data) {
+        $datas = explode('-', $data);
+        $dia = $datas[2];
+        $mes = $datas[1];
+        $ano = $datas[0];
+        return  $dia.'/'.$mes.'/'.$ano;
+       
     }
 
 }

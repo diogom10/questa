@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp64/www/questa/application/models/Login_model.php</file>
+            <file>file:/C:/wamp64/www/questa/assets/js/Back-end/login/modal/questa_cadastro_dados.js</file>
             <file>file:/C:/wamp64/www/questa/application/controllers/Home.php</file>
+            <file>file:/C:/wamp64/www/questa/assets/css/login.scss</file>
+            <file>file:/C:/wamp64/www/questa/application/views/templates/energia_angular/home_view.php</file>
+            <file>file:/C:/wamp64/www/questa/application/views/templates/energia_angular/login_view.php</file>
+            <file>file:/C:/wamp64/www/questa/application/controllers/Login.php</file>
+            <file>file:/C:/wamp64/www/questa/assets/js/Back-end/home/questa_home.js</file>
         </group>
     </open-files>
 </project-private>

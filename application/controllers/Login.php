@@ -28,7 +28,7 @@ class Login extends CI_Controller {
             "email" => $params["email"],
             "senha" => md5($params["senha"] . HASH),
             "cpf" => $params["cpf"],
-            "data_nascimento" => $params["data"],
+            "data_nascimento" => $this->formataData($params["data"]),
             "permicao" => 1,
             "tipo" => 1
         );
@@ -146,6 +146,21 @@ class Login extends CI_Controller {
             $retorno['sucess'] = false;
         }
         echo json_encode($retorno);
+    }
+
+    public function formataData($data) {
+        $datas = explode(' ', $data);
+        $meses = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+        $mes = "";
+        for ($i = 0; $i < count($meses); $i++) {
+            if ($meses[$i] == $datas[1]) {
+                $mes = (string) $i + 1;
+            }
+        }
+
+        $data_nascimento =  $datas[3].'-'.$mes.'-'.$datas[2];
+        
+        return $data_nascimento;
     }
 
 }

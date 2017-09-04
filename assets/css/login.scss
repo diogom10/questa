@@ -3,7 +3,7 @@
 body{
     overflow-x: overlay;
     overflow-y: hidden;
-  
+
     .entrada{
         border: solid 1px #d0cbcb;
         width: 100%;
@@ -29,12 +29,13 @@ body{
     .txt-subtitle{
         font-size:12px;
     }
-        .selecionado{
+    .selecionado{
         background-color: #d2d2ab;
     }
     .negrito{
         font-weight:bold;
     }
+
 }
 .masc
 {
@@ -47,3 +48,12 @@ body{
     background-color:#000;
     opacity:0.4;
 }
+
+    .txt-pagination{
+        float:left; 
+        padding-left:2%;
+        cursor:pointer;
+        color:#0f7c88;
+        font-size:15px;
+        font-style:underline;
+    }

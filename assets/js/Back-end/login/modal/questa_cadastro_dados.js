@@ -2,16 +2,19 @@ var base_url = "http://localhost/questa/index.php/";
 
 angular.module("questa", []);
 angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) {
-
+    $scope.inicio = 0;
+    $scope.fim = 5;
     $scope.app = "questa";
     $scope.mostraLogin = true;
-    $scope.cadastro;
+    $scope.cadastro = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
     $scope.usuarios;
     var excluir = [];
     $scope.mostraEdit = true;
     $scope.id_click = "";
-    $scope.edit = {nome: "", email: "", data_nascimento: "", cpf: "", id: ""};
-    vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: ""};
+    $scope.limite = 5;
+    $scope.edit;
+    $scope.paginas = [];
+    vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
 
     $scope.validaLogin = function () {
         $http({
@@ -52,10 +55,12 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
         $scope.modalCadastro = true;
         $scope.mostraLogin = false;
         console.log($scope.modalCadastro);
+        $scope.cadastro = vazio;
     };
     $scope.closeModal = function () {
         $scope.modalCadastro = false;
         $scope.mostraLogin = true;
+        $scope.cadastro = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
     };
     $scope.cadastroUsuario = function () {
 
@@ -70,11 +75,15 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
                     $scope.msgCpf = response.data.mensagem_cpf;
                     $scope.msgEmail = response.data.mensagem_email;
                     $scope.sis = true;
-                    $scope.getUsuarios();
+
                 } else {
                     alert("Usuario Cadastrado com Sucesso");
+                    
                     $scope.modalCadastro = false;
                     $scope.mostraLogin = true;
+                    $scope.getUsuarios();
+                    $scope.cadastro = "";
+                    $scope.sis = false;
                 }
             });
 
@@ -92,6 +101,8 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
     $scope.closeTabela = function () {
         $scope.mostraTabela = false;
         $scope.mostraLogin = true;
+        $scope.criterioDeBusca = "";
+        $scope.cancelaEdit();
     };
 
     $scope.getUsuarios = function () {
@@ -104,6 +115,16 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
         }).then(function (response) {
             if (response.data.sucess) {
                 $scope.usuarios = response.data.usuarios;
+                pagina = Math.ceil($scope.usuarios.length / 5);
+                console.log($scope.usuarios.length);
+                var i = 0;
+                for (i = 1; i <= pagina; i++) {
+                    $scope.paginas[i] = i;
+                    if (i === pagina) {
+                        $scope.ultima_pag = i;
+                    }
+                }
+                $scope.paginacao($scope.ultimaPaginaClicada);
             } else {
                 console.log("não foi");
             }
@@ -129,6 +150,7 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
             if (response.data.sucess) {
                 console.log("excluiu");
                 $scope.getUsuarios();
+
             } else {
 
             }
@@ -187,9 +209,10 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
         }
     };
 
-    $scope.editarClick = function (id) {
+    $scope.editarClick = function (id, dados) {
         $scope.id_click = id;
         $scope.edit = vazio;
+        $scope.edit = {nome: dados.nome, email: dados.email, data_nascimento: dados.data_nascimento, cpf: dados.cpf, permicao: 1};
     };
 
     $scope.cancelaEdit = function () {
@@ -213,10 +236,16 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
 
         $scope.edit.cpf = cpf;
     };
+    $scope.permicao = function (valido) {
+
+        $scope.edit.permicao = valido;
+
+    };
     ////
     $scope.editarUsuario = function (id) {
         $scope.edit.id = id;
-
+        console.log($scope.edit);
+        $scope.id_click = "";
         $http({
             method: 'POST',
             url: base_url + "Login/edit",
@@ -231,5 +260,32 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
 
             }
         });
+
+
+    };
+    $scope.paginacao = function (pagina) {
+        $scope.ultimaPaginaClicada = pagina;
+        $scope.inicio = 0;
+        $scope.fim = 0;
+        $scope.limite = 5;
+
+        pagina === 1 ? $scope.inicio = 0 : $scope.inicio = (5 * (pagina - 1));
+
+        if (pagina === $scope.ultima_pag) {
+            $scope.fim = $scope.usuarios.length;
+            $scope.limite = $scope.usuarios.length - $scope.inicio;
+        } else {
+            $scope: $scope.fim = 5 * (pagina);
+        }
+
+    };
+    $scope.dataformatada = function (data) {
+        split = data.split('-');
+        novaData = split[2] + "/" + split[1] + "/" + split[0];
+        return novaData;
+    };
+    $scope.filtro = function (filtro) {
+        $scope.limite = 5;
+        teste = filtro;
     };
 });

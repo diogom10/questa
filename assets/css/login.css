@@ -30,4 +30,12 @@ body {
   background-color: #000;
   opacity: 0.4; }
 
+.txt-pagination {
+  float: left;
+  padding-left: 2%;
+  cursor: pointer;
+  color: #0f7c88;
+  font-size: 15px;
+  font-style: underline; }
+
 /*# sourceMappingURL=login.css.map */

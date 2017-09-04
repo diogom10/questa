@@ -87,11 +87,12 @@ Class Login_model extends CI_Model {
     }
 
     public function edit($data) {
-      //  var_dump($data) . die;
+        
         $this->db->set('nome', $data['nome']);
         $this->db->set('email', $data['email']);
         $this->db->set('data_nascimento', $data['data_nascimento']);
         $this->db->set('cpf', $data['cpf']);
+        $this->db->set('permicao', $data['permicao']);
         $this->db->where('id', $data['id']);
         $this->db->update('usuario');
         return true;
