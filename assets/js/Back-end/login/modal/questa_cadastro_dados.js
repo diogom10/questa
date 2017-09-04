@@ -60,7 +60,7 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
     $scope.closeModal = function () {
         $scope.modalCadastro = false;
         $scope.mostraLogin = true;
-        $scope.cadastro = $scope.vazio;
+        $scope.cadastro =   $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
     };
     $scope.cadastroUsuario = function () {
 
@@ -78,7 +78,7 @@ angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) 
 
                 } else {
                     alert("Usuario Cadastrado com Sucesso");
-                    
+                    $scope.cadastro =   $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
                     $scope.modalCadastro = false;
                     $scope.mostraLogin = true;
                     $scope.getUsuarios();
