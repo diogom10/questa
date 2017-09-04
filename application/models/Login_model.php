@@ -46,10 +46,10 @@ Class Login_model extends CI_Model {
             "nome_login" => '',
             'id_usuario' => ''
         );
-     
+
         $this->db->where('email', $dados['email']);
         $query = $this->db->get('usuario')->result();
-    
+
         foreach ($query as $login) {
 
             if ($login->email == $dados['email']) {
@@ -74,6 +74,28 @@ Class Login_model extends CI_Model {
         return $resposta;
     }
 
-}
-?>
+    public function delete($id) {
 
+        if (is_array($id)) {
+            $this->db->where_in('id', $id);
+        } else {
+            $this->db->where('id', $id);
+        }
+        $this->db->delete('usuario');
+
+        return true;
+    }
+
+    public function edit($data) {
+        
+        $this->db->set('nome', $data['nome']);
+        $this->db->set('email', $data['email']);
+        $this->db->set('data_nascimento', $data['data_nascimento']);
+        $this->db->set('cpf', $data['cpf']);
+        $this->db->set('permicao', $data['permicao']);
+        $this->db->where('id', $data['id']);
+        $this->db->update('usuario');
+        return true;
+    }
+
+}

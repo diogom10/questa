@@ -4,21 +4,20 @@ angular.module("questaHome", []);
 angular.module("questaHome").controller("homeCtrl", function ($scope, $http) {
 
     $scope.app = "questaHome";
-
-    $scope.getUsuarios = function () {
-        console.log("teste");
+    
+     $scope.deslogar = function () {
+         console.log("teste");
         $http({
             method: 'POST',
-            url: base_url + "Home/get_usuarios",
-            data: $.param({valido: 1}),
+            url: base_url + "Home/sair",
+            data: $.param({login:true}),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if (response.data.sucess) {
-                console.log(response.data.usuarios);
+                 window.location.href = base_url;
             } else {
-                console.log("não foi");
-            }
 
+            }
         });
     };
 

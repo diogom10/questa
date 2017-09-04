@@ -28,7 +28,7 @@ class Login extends CI_Controller {
             "email" => $params["email"],
             "senha" => md5($params["senha"] . HASH),
             "cpf" => $params["cpf"],
-            "data_nascimento" => $params["data"],
+            "data_nascimento" => $this->formataData($params["data"]),
             "permicao" => 1,
             "tipo" => 1
         );
@@ -38,6 +38,7 @@ class Login extends CI_Controller {
 
         $valida_email = $this->model->valida_email($dados_cadastro["email"]);
         $valida_cpf = $this->model->valida_cpf($dados_cadastro["cpf"]);
+
         if ($valida_email == 0 && $valida_cpf == 0) {
             $this->cadastrar($dados_cadastro);
             $retorno_cadastro['existe_erro'] = false;
@@ -121,6 +122,45 @@ class Login extends CI_Controller {
         }
 
         echo json_encode($retorno_login);
+    }
+
+    public function delete() {
+        $params = $this->input->post();
+
+        $valida = $this->model->delete($params['id']);
+        if ($valida) {
+            $retorno['sucess'] = true;
+        } else {
+            $retorno['sucess'] = false;
+        }
+        echo json_encode($retorno);
+    }
+
+    public function edit() {
+        $params = $this->input->post();
+
+        $valida = $this->model->edit($params);
+        if ($valida) {
+            $retorno['sucess'] = true;
+        } else {
+            $retorno['sucess'] = false;
+        }
+        echo json_encode($retorno);
+    }
+
+    public function formataData($data) {
+        $datas = explode(' ', $data);
+        $meses = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+        $mes = "";
+        for ($i = 0; $i < count($meses); $i++) {
+            if ($meses[$i] == $datas[1]) {
+                $mes = (string) $i + 1;
+            }
+        }
+
+        $data_nascimento =  $datas[3].'-'.$mes.'-'.$datas[2];
+        
+        return $data_nascimento;
     }
 
 }
