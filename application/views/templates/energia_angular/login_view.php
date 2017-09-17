@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" ng-app="questa">
+<html lang="pt-BR" ng-app="teste">
     <head>
         <title><?php echo $title; ?></title>
         <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
         <script src="<?php echo base_url(); ?>assets/js/jquery/jquery-3.2.1.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/angular/angular.js"></script>
 <!--        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/questa_login_dados.js"></script>-->
-        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/modal/questa_cadastro_dados.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/modal/cadastro_dados.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">

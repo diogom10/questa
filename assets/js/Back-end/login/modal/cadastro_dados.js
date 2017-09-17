@@ -1,7 +1,7 @@
 var base_url = "http://localhost/questa/index.php/";
 
-angular.module("questa", []);
-angular.module("questa").controller("telaDeLoginCtrl", function ($scope, $http) {
+angular.module("teste", []);
+angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
     $scope.inicio = 0;
     $scope.fim = 5;
     $scope.app = "questa";
