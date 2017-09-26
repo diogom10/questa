@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/questa/assets/js/Back-end/login/modal/cadastro_dados.js</file>
+            <file>file:/C:/xampp/htdocs/questa/assets/js/Back-end/home/home.js</file>
+            <file>file:/C:/xampp/htdocs/questa/application/controllers/Login.php</file>
+            <file>file:/C:/xampp/htdocs/questa/application/controllers/Home.php</file>
+            <file>file:/C:/xampp/htdocs/questa/application/views/templates/energia_angular/home_view.php</file>
+            <file>file:/C:/xampp/htdocs/questa/application/views/templates/energia_angular/login_view.php</file>
+        </group>
     </open-files>
 </project-private>

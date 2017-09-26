@@ -10,6 +10,14 @@
         <script src="<?php echo base_url(); ?>assets/js/angular/angular.js"></script>
 <!--        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/questa_login_dados.js"></script>-->
         <script src="<?php echo base_url(); ?>assets/js/Back-end/login/modal/cadastro_dados.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiDateDirective.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiCpfDirective.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiCnpjDirective.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiEstadualDirective.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiMunicipalDirective.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/Back-end/login/directves/uiRgDirective.js"></script>
+
+
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -83,14 +91,50 @@
                         </div>
 
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                            <input class="form-control"  name="cpf" type="text" ng-model="cadastro.cpf" placeholder="CPF" ng-required="true" ng-pattern="/[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/" maxlength="11" autocomplete="off"/>
+                            <input class="form-control"  name="cpf" type="text" ng-model="cadastro.cpf" placeholder="CPF" ng-required="true" autocomplete="off" ui-Cpf/>
                         </div>
+
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                             <input class="form-control"  name="senha" type="password" ng-model="cadastro.senha" placeholder="senha" ng-required="true" autocomplete="off" />
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                             <input class="form-control"  name="senha2" type="password" ng-model="cadastro.senha2" placeholder="Confirme a senha"ng-required="true" autocomplete="off"/>
                         </div>
+
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                            <input class="form-control"  name="data2" type="text" ng-model="cadastro.datas" placeholder="Data "ng-required="true" autocomplete="off" ui-date/>
+                        </div>
+
+
+
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                            <input class="form-control"  type="text" ng-model="cadastro.estadual"  ng-required="true" placeholder="Estadual" autocomplete="off" ui-Estadualsp/>
+                        </div>
+
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                            <input class="form-control"   type="text" ng-model="cadastro.municipal" ng-required="true" placeholder="Municipal" autocomplete="off" ui-Municipal/>
+                        </div>
+
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                            <input class="form-control"   type="text" ng-model="cadastro.cnpj" ng-required="true" placeholder="Cnpj" autocomplete="off" ui-Cnpj/>
+                        </div>
+                        
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                            <input class="form-control"   type="text" ng-model="cadastro.rg" ng-required="true" placeholder="Rg" autocomplete="off" ui-Rg/>
+                        </div>
+                        
+
+
+
+
+
+
+
+
+
+
+
+                        {{cadastro.datas}}
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding-top: 3%"></div>
                         <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2"></div>
                         <button class="col-md-4 col-lg-4  col-sm-12 col-xs-12 btn btn-success" ng-disabled="cadastroForm.$invalid" ng-click="cadastroUsuario()">Cadastrar</button>

@@ -15,6 +15,7 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
     $scope.edit;
     $scope.paginas = [];
     $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
+    $scope.cpf;
 
     $scope.validaLogin = function () {
         $http({
@@ -51,6 +52,31 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
             }
         });
     };
+
+    $scope.cpfFormat = function (cpf) {
+
+        var teste1;
+        var teste2;
+        var teste3;
+        var teste4;
+
+        if (cpf.length < 13) {
+            teste1 = cpf.substr(0, 3) + ".";
+            teste2 = cpf.substr(3, 3) + ".";
+            teste3 = cpf.substr(6, 3) + "-";
+            teste4 = cpf.substr(9, 10);
+
+            var result = teste1 + teste2 + teste3 + teste4;
+        }
+
+
+        if (result.length == 14) {
+
+           $scope.cadastro.cpf = result;
+        }
+
+    }
+
     $scope.openModal = function () {
         $scope.modalCadastro = true;
         $scope.mostraLogin = false;
@@ -60,7 +86,7 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
     $scope.closeModal = function () {
         $scope.modalCadastro = false;
         $scope.mostraLogin = true;
-        $scope.cadastro =   $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
+        $scope.cadastro = $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
     };
     $scope.cadastroUsuario = function () {
 
@@ -78,7 +104,7 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
 
                 } else {
                     alert("Usuario Cadastrado com Sucesso");
-                    $scope.cadastro =   $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
+                    $scope.cadastro = $scope.vazio = {nome: "", email: "", data_nascimento: "", cpf: "", id: "", permicao: ""};
                     $scope.modalCadastro = false;
                     $scope.mostraLogin = true;
                     $scope.getUsuarios();
@@ -212,7 +238,7 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
     $scope.editarClick = function (dados) {
         $scope.id_click = dados.id;
         $scope.edit = $scope.vazio;
-        $scope.edit = {nome: dados.nome, email: dados.email, data_nascimento: dados.data_nascimento, cpf: dados.cpf, permicao: 1, id:dados.id};
+        $scope.edit = {nome: dados.nome, email: dados.email, data_nascimento: dados.data_nascimento, cpf: dados.cpf, permicao: 1, id: dados.id};
         console.log($scope.edit);
     };
 
@@ -244,7 +270,7 @@ angular.module("teste").controller("telaDeLoginCtrl", function ($scope, $http) {
     };
     ////
     $scope.editarUsuario = function () {
-       
+
         console.log($scope.edit);
         $scope.id_click = "";
         $http({
